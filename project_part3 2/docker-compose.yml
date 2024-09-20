@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  book_catalog:
+    build: 
+     context: ./book_catalog
+     dockerfile: Dockerfile
+    ports:
+      - "8001:80"
+    environment:
+      - DATABASE_URL=postgresql://week007_user:pKv4bRACzHRmeYxB5KJcQYXgNUbw0tlr@dpg-crm5git6l47c73eqn6f0-a.oregon-postgres.render.com/week007
+    networks:
+      - app-network
+
+  inventory_management:
+    build: 
+     context: ./inventory_management
+     dockerfile: Dockerfile
+    ports:
+      - "8002:80"
+    environment:
+      - DATABASE_URL=postgresql://week007_user:pKv4bRACzHRmeYxB5KJcQYXgNUbw0tlr@dpg-crm5git6l47c73eqn6f0-a.oregon-postgres.render.com/week007
+    networks:
+      - app-network
+
+networks:
+  app-network:  
+   driver: bridge
